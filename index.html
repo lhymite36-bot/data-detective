@@ -1,0 +1,41 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Data Detective · Case 1: The Biryani Bandit</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head><body>
+<header><h1>🕵️ DATA <span>DETECTIVE</span></h1><div class="case">CASE #001 · THE BIRYANI BANDIT</div></header>
+<section id="intro" class="panel chief">
+  <div class="avatar">🐻‍❄️</div>
+  <div><h2>Chief Sharma says:</h2><p id="chiefLine"></p><button id="startBtn">Fine. I'll solve it. 🙄</button></div>
+</section>
+<main id="game" class="hidden">
+  <nav class="tabs"><button data-t="board" class="on">📌 Evidence</button><button data-t="sql">💻 SQL</button><button data-t="chart">📉 Chart</button><button data-t="suspects">🎭 Suspects</button></nav>
+  <section id="board" class="tab panel">
+    <h2>Evidence Board</h2>
+    <div class="cards">
+      <div class="ev"><b>employees</b><small>id, name, dept, note</small></div>
+      <div class="ev"><b>door_swipes</b><small>emp_id, day, time, door (FRIDGE_ROOM / MAIN_DOOR)</small></div>
+      <div class="ev"><b>canteen_orders</b><small>emp_id, day, time, item, price</small></div>
+      <div class="ev"><b>fridge_inventory</b><small>day, time, biryani_boxes, event</small></div>
+      <div class="ev"><b>cctv_notes</b><small>day, time, note</small></div>
+    </div>
+    <h3>🔎 Clues found <span id="clueCount">0/3</span></h3><ul id="clues"></ul>
+    <button id="hintBtn" class="ghost">I'm stuck (hint)</button><p id="hint" class="hint"></p>
+  </section>
+  <section id="sql" class="tab panel hidden">
+    <h2>SQL Console</h2>
+    <textarea id="q" spellcheck="false">SELECT * FROM fridge_inventory LIMIT 10;</textarea>
+    <div class="row"><button id="runBtn">▶ Run (Ctrl+Enter)</button><span id="sqlMsg"></span></div>
+    <div id="results" class="results"></div>
+  </section>
+  <section id="chart" class="tab panel hidden">
+    <h2>Biryani boxes missing after lunch (per day)</h2>
+    <p class="sub">Canteen sales are accounted for. These are the boxes that just… vanished.</p>
+    <canvas id="chartC" height="220"></canvas>
+  </section>
+  <section id="suspects" class="tab panel hidden"><h2>Suspects</h2><div id="sus" class="cards"></div></section>
+</main>
+<div id="modal" class="modal hidden"><div class="mbox"><div id="mbody"></div><button id="mclose">OK</button></div></div>
+<script src="data.js"></script><script src="app.js"></script>
+</body></html>
